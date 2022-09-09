@@ -40,17 +40,21 @@ namespace Vector
 
 		public Vector Subtract(Vector v)
 		{
-			return new Vector();
+			Vector result = new Vector(this.X - v.X, this.Y - v.Y);
+			return result;
 		}
 
-		public double Dot(Vector v)
-		{
-			return 0.0;
-		}
+        public double Dot(Vector v)
+        {
+			double result = (this.X * v.X) + (this.Y * v.Y);
+            return result;
+        }
+     
 
 		public double AngleBetween(Vector v)
 		{
-			return 0.0;
+			double result = Math.Acos(result = this * v / (this.Magnitude * v.Magnitude)) * 180 / Math.PI;
+			return result;
 		}
 
 		public override string ToString()
