@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Reflection.Metadata.Ecma335;
+
 namespace Uno
 {
 	public class Player
@@ -13,10 +15,18 @@ namespace Uno
 			Hand = new List<Card>();
 		}
 
-        public bool HasPlayableCard(Card card)
+         public bool HasPlayableCard(Card card)
 		{
+			 foreach (Card item in Hand)
+			{ 
+				bool value = Card.PlaysOn(item, card);
+				if (value == true)
+				{
+					return true;
+				} 
+			}
 			return false;
-		}
+        } 
 
         public Card GetFirstPlayableCard(Card card)
 		{
@@ -25,9 +35,22 @@ namespace Uno
 
         public Color MostCommonColor()
 		{
-			return Color.Blue;
-		}
-
+            Dictionary<Uno.Color, int> commonColor= new Dictionary<Uno.Color, int>();
+			commonColor.Add(Uno.Color.Red, 0);
+            commonColor.Add(Uno.Color.Yellow, 0);
+            commonColor.Add(Uno.Color.Blue, 0);
+            commonColor.Add(Uno.Color.Green, 0);
+			foreach (var card in Hand)
+			{			
+				commonColor.Add(card.Color, +1);
+			}
+            foreach (KeyValuePair<Uno.Color, int> pair in commonColor){
+				if (pair.Value == commonColor.Values.Max()){
+					return pair.Key;
+				}				
+			}
+			return new Color();
+        }
 
     }
 }
