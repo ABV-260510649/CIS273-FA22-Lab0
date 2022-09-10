@@ -50,8 +50,9 @@ namespace Uno
             commonColor.Add(Uno.Color.Blue, 0);
             commonColor.Add(Uno.Color.Green, 0);
 			foreach (var card in Hand)
-			{			
-				commonColor.Add(card.Color, +1);
+			{
+				commonColor[card.Color] += 1;
+
 			}
             foreach (KeyValuePair<Uno.Color, int> pair in commonColor){
 				if (pair.Value == commonColor.Values.Max()){
