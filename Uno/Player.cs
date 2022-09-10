@@ -28,9 +28,18 @@ namespace Uno
 			return false;
         } 
 
-        public Card GetFirstPlayableCard(Card card)
+        public Card? GetFirstPlayableCard(Card card)
 		{
-			return new Card();
+			foreach(Card item in Hand)
+			{
+                if (Card.PlaysOn(item,card) == true)
+                {
+					Card playableCard = item;
+					return playableCard;
+                }
+            }
+
+			return null;
 		}
 
         public Color MostCommonColor()
